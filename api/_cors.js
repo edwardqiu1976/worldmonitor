@@ -1,15 +1,19 @@
 const ALLOWED_ORIGIN_PATTERNS = [
-  /^https:\/\/(.*\.)?worldmonitor\.app$/,
-  /^https:\/\/worldmonitor-[a-z0-9-]+-elie-[a-z0-9]+\.vercel\.app$/,
-  /^https?:\/\/tauri\.localhost(:\d+)?$/,
-  /^https?:\/\/[a-z0-9-]+\.tauri\.localhost(:\d+)?$/i,
-  /^tauri:\/\/localhost$/,
-  /^asset:\/\/localhost$/,
-  // Only allow bare localhost/127.0.0.1 in non-production (matches server/cors.ts)
-  ...(process.env.NODE_ENV === 'production' ? [] : [
-    /^https?:\/\/localhost(:\d+)?$/,
-    /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
-  ]),
+ // Self-hosted: update this pattern to match your domain
+ // e.g., /^https:\/\/(.*\.)?yourdomain\.com$/,
+ /^https:\/\/(.*\.)?worldmonitor\.app$/,
+ // Vercel preview deployments (auto-matches your vercel.app subdomain)
+ /^https:\/\/[a-z0-9-]+-edwardqiu1976s-projects\.vercel\.app$/,
+ /^https:\/\/worldmonitor-[a-z0-9-]+-[a-z0-9-]+\.vercel\.app$/,
+ /^https?:\/\/tauri\.localhost(:\d+)?$/,
+ /^https?:\/\/[a-z0-9-]+\.tauri\.localhost(:\d+)?$/i,
+ /^tauri:\/\/localhost$/,
+ /^asset:\/\/localhost$/,
+ // Development (only in non-production)
+ ...(process.env.NODE_ENV === 'production' ? [] : [
+ /^https?:\/\/localhost(:\d+)?$/,
+ /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
+ ]),
 ];
 
 function isAllowedOrigin(origin) {
